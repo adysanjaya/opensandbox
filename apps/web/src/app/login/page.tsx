@@ -95,7 +95,7 @@ function LoginContent() {
   };
 
   const handleGoogleRedirect = () => {
-    const redirectUri = 'http://localhost:3000/login';
+    const redirectUri = `${process.env.NEXT_PUBLIC_WEB_URL || window.location.origin}/login`;
     const scope = 'openid email profile';
     const state = Math.random().toString(36).substring(2);
     sessionStorage.setItem('google_oauth_state', state);

@@ -198,7 +198,7 @@ app.post('/google/code', zValidator('json', googleCodeSchema), async (c) => {
         code: body.code,
         client_id: GOOGLE_CLIENT_ID,
         client_secret: GOOGLE_CLIENT_SECRET,
-        redirect_uri: 'http://localhost:3000/login',
+        redirect_uri: `${process.env.WEB_URL || 'http://localhost:3000'}/login`,
         grant_type: 'authorization_code',
       }),
     });
