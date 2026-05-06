@@ -1,0 +1,33 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "dev:api": "bun run --filter api dev",
+    "dev:web": "bun run --filter web dev",
+    "build": "bun run --filter '*' build",
+    "build:api": "bun run --filter api build",
+    "build:web": "bun run --filter web build",
+    "db:generate": "bun run --filter api db:generate",
+    "db:migrate": "bun run --filter api db:migrate",
+    "db:studio": "bun run --filter api db:studio",
+    "lint": "bun run --filter '*' lint",
+    "pm2:start": "pm2 start ecosystem.config.cjs",
+    "pm2:start:prod": "pm2 start ecosystem.prod.config.cjs --env production",
+    "pm2:stop": "pm2 stop all",
+    "pm2:restart": "pm2 restart all",
+    "pm2:delete": "pm2 delete all",
+    "pm2:logs": "pm2 logs",
+    "pm2:status": "pm2 status",
+    "pm2:monit": "pm2 monit",
+    "pm2:save": "pm2 save"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
