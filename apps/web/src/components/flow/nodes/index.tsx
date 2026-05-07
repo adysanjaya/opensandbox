@@ -41,16 +41,16 @@ const BORDER_MAP: Record<string, string> = {
 };
 
 const BG_MAP: Record<string, string> = {
-  green: 'bg-green-50',
-  blue: 'bg-blue-50',
-  purple: 'bg-purple-50',
-  amber: 'bg-amber-50',
-  cyan: 'bg-cyan-50',
-  gray: 'bg-gray-50',
-  red: 'bg-red-50',
-  indigo: 'bg-indigo-50',
-  teal: 'bg-teal-50',
-  pink: 'bg-pink-50',
+  green: 'bg-green-50 dark:bg-green-900/20',
+  blue: 'bg-blue-50 dark:bg-blue-900/20',
+  purple: 'bg-purple-50 dark:bg-purple-900/20',
+  amber: 'bg-amber-50 dark:bg-amber-900/20',
+  cyan: 'bg-cyan-50 dark:bg-cyan-900/20',
+  gray: 'bg-gray-50 dark:bg-gray-800/30',
+  red: 'bg-red-50 dark:bg-red-900/20',
+  indigo: 'bg-indigo-50 dark:bg-indigo-900/20',
+  teal: 'bg-teal-50 dark:bg-teal-900/20',
+  pink: 'bg-pink-50 dark:bg-pink-900/20',
 };
 
 interface WrapperProps {
@@ -128,7 +128,7 @@ export const ConditionNode = memo((props: NodeProps) => {
     <div
       className={`min-w-[260px] rounded-xl border transition-all duration-200 ${
         props.selected
-          ? 'border-2 border-amber-500 bg-amber-50 shadow-lg ring-2 ring-amber-500/20'
+          ? 'border-2 border-amber-500 bg-amber-50 dark:bg-amber-900/20 shadow-lg ring-2 ring-amber-500/20'
           : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
       }`}
     >
@@ -139,7 +139,7 @@ export const ConditionNode = memo((props: NodeProps) => {
             <ArrowPathIcon className="w-4 h-4 text-white" />
           </div>
           <span className="font-semibold text-sm text-foreground tracking-tight truncate">{String(data.label || 'Condition')}</span>
-          <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-lg font-semibold">
+          <span className="text-xs bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-lg font-semibold">
             {conditions.length}
           </span>
         </div>
@@ -150,7 +150,7 @@ export const ConditionNode = memo((props: NodeProps) => {
                 className={`text-xs px-3 py-1.5 rounded-lg flex-1 truncate flex items-center gap-2 ${
                   cond.type === 'default'
                     ? 'bg-muted text-muted-foreground border border-border'
-                    : 'bg-amber-100 text-amber-700 border border-amber-200'
+                    : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50'
                 }`}
               >
                 <span className="font-mono text-[10px] bg-card/60 px-1.5 py-0.5 rounded-lg font-medium">{idx + 1}</span>
@@ -190,10 +190,10 @@ export const HttpRequestNode = memo((props: NodeProps) => {
     <NodeWrapper selected={props.selected} color="purple" icon={<GlobeAltIcon className="w-4 h-4 text-white" />} label={String(data.label || 'HTTP Request')}>
       <div className="flex items-center gap-2">
         <span className={`text-xs px-2 py-0.5 rounded-lg font-semibold ${
-          method === 'GET' ? 'bg-green-100 text-green-700' :
-          method === 'POST' ? 'bg-blue-100 text-blue-700' :
-          method === 'PUT' ? 'bg-amber-100 text-amber-700' :
-          'bg-red-100 text-red-700'
+          method === 'GET' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300' :
+          method === 'POST' ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300' :
+          method === 'PUT' ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300' :
+          'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300'
         }`}>
           {method}
         </span>
@@ -247,7 +247,7 @@ export const RandomSplitNode = memo((props: NodeProps) => {
 
   return (
     <div className={`min-w-[220px] rounded-xl border transition-all duration-200 ${
-      props.selected ? 'border-2 border-indigo-500 bg-indigo-50 shadow-lg ring-2 ring-indigo-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
+      props.selected ? 'border-2 border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 shadow-lg ring-2 ring-indigo-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
     }`}>
       <Handle type="target" position={Position.Top} className="!w-3 !h-3 !bg-indigo-500 !border-2 !border-card" />
       <div className="p-3">
@@ -263,7 +263,7 @@ export const RandomSplitNode = memo((props: NodeProps) => {
         <div className="flex gap-1">
           {branches.map((_: any, i: number) => (
             <div key={i} className="relative flex-1">
-              <div className="text-xs bg-indigo-100 text-indigo-700 px-1 py-1 rounded-lg text-center font-medium">{branches[i].percentage}%</div>
+              <div className="text-xs bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 px-1 py-1 rounded-lg text-center font-medium">{branches[i].percentage}%</div>
               <Handle type="source" position={Position.Bottom} id={`branch-${i}`} className="!absolute !left-1/2 !-translate-x-1/2 !bottom-[-8px] !w-3 !h-3 !bg-indigo-500 !border-2 !border-card" />
             </div>
           ))}
@@ -280,14 +280,14 @@ export const ResponseNode = memo((props: NodeProps) => {
   const statusCode = Number(data.statusCode) || 200;
 
   const typeColors: Record<string, string> = {
-    json: 'bg-blue-100 text-blue-700',
-    text: 'bg-gray-100 text-gray-700',
-    xml: 'bg-teal-100 text-teal-700',
+    json: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300',
+    text: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300',
+    xml: 'bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300',
   };
 
   return (
     <div className={`min-w-[180px] rounded-xl border transition-all duration-200 ${
-      props.selected ? 'border-2 border-teal-500 bg-teal-50 shadow-lg ring-2 ring-teal-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
+      props.selected ? 'border-2 border-teal-500 bg-teal-50 dark:bg-teal-900/20 shadow-lg ring-2 ring-teal-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
     }`}>
       <Handle type="target" position={Position.Top} className="!w-3 !h-3 !bg-teal-500 !border-2 !border-card" />
       <div className="p-3">
@@ -312,7 +312,7 @@ export const ValidateInputNode = memo((props: NodeProps) => {
   const rules = Array.isArray(data.rules) ? data.rules : [];
   return (
     <div className={`min-w-[220px] rounded-xl border transition-all duration-200 ${
-      props.selected ? 'border-2 border-red-500 bg-red-50 shadow-lg ring-2 ring-red-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
+      props.selected ? 'border-2 border-red-500 bg-red-50 dark:bg-red-900/20 shadow-lg ring-2 ring-red-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
     }`}>
       <Handle type="target" position={Position.Top} className="!w-3 !h-3 !bg-red-500 !border-2 !border-card" />
       <div className="p-3">
@@ -325,7 +325,7 @@ export const ValidateInputNode = memo((props: NodeProps) => {
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between relative">
-            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-semibold">valid</span>
+            <span className="text-[10px] bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded font-semibold">valid</span>
             <Handle
               type="source"
               position={Position.Right}
@@ -335,7 +335,7 @@ export const ValidateInputNode = memo((props: NodeProps) => {
             />
           </div>
           <div className="flex items-center justify-between relative">
-            <span className="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-semibold">invalid</span>
+            <span className="text-[10px] bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded font-semibold">invalid</span>
             <Handle
               type="source"
               position={Position.Right}
@@ -357,7 +357,7 @@ export const VariableCheckNode = memo((props: NodeProps) => {
   const checkType = String(data.checkType || 'exists');
   return (
     <div className={`min-w-[220px] rounded-xl border transition-all duration-200 ${
-      props.selected ? 'border-2 border-amber-500 bg-amber-50 shadow-lg ring-2 ring-amber-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
+      props.selected ? 'border-2 border-amber-500 bg-amber-50 dark:bg-amber-900/20 shadow-lg ring-2 ring-amber-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
     }`}>
       <Handle type="target" position={Position.Top} className="!w-3 !h-3 !bg-amber-500 !border-2 !border-card" />
       <div className="p-3">
@@ -372,7 +372,7 @@ export const VariableCheckNode = memo((props: NodeProps) => {
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between relative">
-            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-semibold">pass</span>
+            <span className="text-[10px] bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded font-semibold">pass</span>
             <Handle
               type="source"
               position={Position.Right}
@@ -382,7 +382,7 @@ export const VariableCheckNode = memo((props: NodeProps) => {
             />
           </div>
           <div className="flex items-center justify-between relative">
-            <span className="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-semibold">fail</span>
+            <span className="text-[10px] bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded font-semibold">fail</span>
             <Handle
               type="source"
               position={Position.Right}

@@ -477,7 +477,17 @@ export class FlowEngine {
         const errorStatusCode = Number(data.errorStatusCode) || 400;
         const errorResponseType = data.errorResponseType || 'json';
 
-        const variableValue = context.variables[varName];
+        // Lookup variable from multiple sources: variables > query > body > headers
+        let variableValue = context.variables[varName];
+        if (variableValue === undefined) {
+          variableValue = context.request.query[varName];
+        }
+        if (variableValue === undefined && context.request.body && typeof context.request.body === 'object') {
+          variableValue = context.request.body[varName];
+        }
+        if (variableValue === undefined) {
+          variableValue = context.request.headers[varName.toLowerCase()];
+        }
         let checkPassed = true;
 
         switch (checkType) {
@@ -531,6 +541,17 @@ export class FlowEngine {
         const checkEdges = this.findEdgesFrom(node.id);
         const passEdge = checkEdges.find((e) => e.sourceHandle === 'pass' || e.condition === 'pass');
         const failEdge = checkEdges.find((e) => e.sourceHandle === 'fail' || e.condition === 'fail');
+
+        console.log('[variable_check]', {
+          nodeId: node.id,
+          varName,
+          checkType,
+          variableValue,
+          checkPassed,
+          edges: checkEdges.map((e) => ({ id: e.id, sourceHandle: e.sourceHandle, target: e.target })),
+          passEdge: passEdge?.target,
+          failEdge: failEdge?.target,
+        });
 
         if (!checkPassed) {
           // If failReturnResponse is true, return error response immediately
