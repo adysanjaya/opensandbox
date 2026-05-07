@@ -356,15 +356,44 @@ export const VariableCheckNode = memo((props: NodeProps) => {
   const varName = String(data.variableName || 'var');
   const checkType = String(data.checkType || 'exists');
   return (
-    <NodeWrapper selected={props.selected} color="amber" icon={<CodeBracketIcon className="w-4 h-4 text-white" />} label={String(data.label || 'Variable Check')}>
-      <div className="text-xs text-muted-foreground font-mono">
-        <span className="font-semibold text-foreground">{varName}</span> <span className="text-muted-foreground">{checkType}</span>
+    <div className={`min-w-[220px] rounded-xl border transition-all duration-200 ${
+      props.selected ? 'border-2 border-amber-500 bg-amber-50 shadow-lg ring-2 ring-amber-500/20' : 'border-border bg-gradient-to-br from-card to-muted/20 shadow-sm hover:shadow-md'
+    }`}>
+      <Handle type="target" position={Position.Top} className="!w-3 !h-3 !bg-amber-500 !border-2 !border-card" />
+      <div className="p-3">
+        <div className="flex items-center gap-2.5 mb-3">
+          <div className="p-1.5 bg-amber-500 rounded-lg shadow-sm">
+            <CodeBracketIcon className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-semibold text-sm text-foreground tracking-tight truncate">{String(data.label || 'Variable Check')}</span>
+        </div>
+        <div className="text-xs text-muted-foreground font-mono mb-2">
+          <span className="font-semibold text-foreground">{varName}</span> <span className="text-muted-foreground">{checkType}</span>
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between relative">
+            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-semibold">pass</span>
+            <Handle
+              type="source"
+              position={Position.Right}
+              id="pass"
+              className="!absolute !right-[-8px] !w-3 !h-3 !bg-green-500 !border-2 !border-card"
+              style={{ top: '50%', transform: 'translateY(-50%)' }}
+            />
+          </div>
+          <div className="flex items-center justify-between relative">
+            <span className="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-semibold">fail</span>
+            <Handle
+              type="source"
+              position={Position.Right}
+              id="fail"
+              className="!absolute !right-[-8px] !w-3 !h-3 !bg-red-500 !border-2 !border-card"
+              style={{ top: '50%', transform: 'translateY(-50%)' }}
+            />
+          </div>
+        </div>
       </div>
-      <div className="flex gap-1 mt-1">
-        <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-medium">pass</span>
-        <span className="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-medium">fail</span>
-      </div>
-    </NodeWrapper>
+    </div>
   );
 });
 VariableCheckNode.displayName = 'VariableCheckNode';
