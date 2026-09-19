@@ -1,0 +1,34 @@
+{
+  "version": "6",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1777714119473,
+      "tag": "0000_known_victor_mancha",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1777770667544,
+      "tag": "0001_fat_outlaw_kid",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1777776561187,
+      "tag": "0002_easy_husk",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1777783356290,
+      "tag": "0003_dizzy_obadiah_stane",
+      "breakpoints": true
+    }
+  ]
+}
